@@ -19,6 +19,7 @@ propiedad(defensa, numero_goles, 1).
 propiedad(delantero, numero_goles, 5).
 propiedad(miembro_millonarios, equipo, equipo_millonarios).
 propiedad(equipo_futbol, numero_jugadores, 11).
+propiedad(miembro_millonarios, camiseta, azul_y_blanca).
 
 hereda_propiedad(Clase, Propiedad, Valor) :-
     propiedad(Clase, Propiedad, Valor).
