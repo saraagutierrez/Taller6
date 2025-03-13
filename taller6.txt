@@ -1,0 +1,30 @@
+es_un(hombre_adulto, persona).
+es_un(jugador_futbol, hombre_adulto).
+es_un(defensa, jugador_futbol).
+es_un(delantero, jugador_futbol).
+es_un(miembro_millonarios, jugador_futbol).
+
+inst(equipo_millonarios, equipo_futbol).
+inst(adith, miembro_millonarios).
+inst(miguel, miembro_millonarios).
+inst(adith, defensa).
+inst(miguel, delantero).
+
+propiedad(persona, pie_habil, derecho).
+propiedad(hombre_adulto, altura, 1.80).
+propiedad(jugador_futbol, altura, 1.85).
+propiedad(jugador_futbol, patea, balon).
+propiedad(jugador_futbol, numero_goles, 3).
+propiedad(defensa, numero_goles, 1).
+propiedad(delantero, numero_goles, 5).
+propiedad(miembro_millonarios, equipo, equipo_millonarios).
+propiedad(equipo_futbol, numero_jugadores, 11).
+
+hereda_propiedad(Clase, Propiedad, Valor) :-
+    propiedad(Clase, Propiedad, Valor).
+    
+hereda_propiedad(clase, propiedad, Valor) :-
+    inst(clase, superclase1),
+    es_un(clase, superclase2),
+    hereda_propiedad(superclase2, propiedad, Valor);
+	hereda_propiedad(superclase1, propiedad, Valor).
