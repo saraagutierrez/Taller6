@@ -1,15 +1,18 @@
+% Es-un 
 es_un(hombre_adulto, persona).
 es_un(jugador_futbol, hombre_adulto).
 es_un(defensa, jugador_futbol).
 es_un(delantero, jugador_futbol).
 es_un(miembro_millonarios, jugador_futbol).
 
+% Instancias
 inst(equipo_millonarios, equipo_futbol).
 inst(adith, miembro_millonarios).
 inst(miguel, miembro_millonarios).
 inst(adith, defensa).
 inst(miguel, delantero).
 
+% Atributos 
 propiedad(persona, pie_habil, derecho).
 propiedad(hombre_adulto, altura, 1.80).
 propiedad(jugador_futbol, altura, 1.85).
@@ -21,17 +24,20 @@ propiedad(miembro_millonarios, equipo, equipo_millonarios).
 propiedad(equipo_futbol, numero_jugadores, 11).
 propiedad(miembro_millonarios, camiseta, azul_y_blanca).
 
+% Regla base para propiedades
 hereda_propiedad(Clase, Propiedad, Valor) :-
     propiedad(Clase, Propiedad, Valor).
-    
-hereda_propiedad(Clase, Propiedad, Valor) :-
-    es_un(Clase, Superclase),
-    hereda_propiedad(Superclase, Propiedad, Valor).
 
+% Regla que permite obtener propiedades de instancias
 hereda_propiedad(Instancia, Propiedad, Valor) :-
     inst(Instancia, Clase),
     propiedad(Clase, Propiedad, Valor).
-    
+
+% Regla que permite heredar propiedades a través de la jerarquía de clases
+hereda_propiedad(Clase, Propiedad, Valor) :-
+    es_un(Clase, Superclase),
+    hereda_propiedad(Superclase, Propiedad, Valor).
+ 
 % Regla que permite heredar propiedades a través de la jerarquía de clases para instancias
 hereda_propiedad(Instancia, Propiedad, Valor) :-
     inst(Instancia, Clase),
