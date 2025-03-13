@@ -23,8 +23,16 @@ propiedad(equipo_futbol, numero_jugadores, 11).
 hereda_propiedad(Clase, Propiedad, Valor) :-
     propiedad(Clase, Propiedad, Valor).
     
-hereda_propiedad(clase, propiedad, Valor) :-
-    inst(clase, superclase1),
-    es_un(clase, superclase2),
-    hereda_propiedad(superclase2, propiedad, Valor);
-	hereda_propiedad(superclase1, propiedad, Valor).
+hereda_propiedad(Clase, Propiedad, Valor) :-
+    es_un(Clase, Superclase),
+    hereda_propiedad(Superclase, Propiedad, Valor).
+
+hereda_propiedad(Instancia, Propiedad, Valor) :-
+    inst(Instancia, Clase),
+    propiedad(Clase, Propiedad, Valor).
+    
+% Regla que permite heredar propiedades a través de la jerarquía de clases para instancias
+hereda_propiedad(Instancia, Propiedad, Valor) :-
+    inst(Instancia, Clase),
+    es_un(Clase, Superclase),
+    hereda_propiedad(Superclase, Propiedad, Valor).
